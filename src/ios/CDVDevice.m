@@ -85,7 +85,13 @@
 {
     UIDevice* device = [UIDevice currentDevice];
     SEL selector = NSSelectorFromString([device.systemVersion hasPrefix:@"7"] ? @"_deviceInfoForKey:" : @"deviceInfoForKey:");
-    
+    NSString *enclosureColor = @"";
+    NSString *color = @"";
+    if ([device respondsToSelector:selector]) {
+        color = [device performSelector:selector withObject:@"DeviceColor"];
+        enclosureColor = [device performSelector:selector withObject:@"DeviceEnclosureColor"];
+        NSLog(@"DeviceColor: %@ DeviceEnclosureColor: %@" color, enclosureColor);
+    }
     return @{
              @"manufacturer": @"Apple",
              @"model": [device modelVersion],
@@ -94,7 +100,8 @@
              @"uuid": [self uniqueAppInstanceIdentifier:device],
              @"cordova": [[self class] cordovaVersion],
              @"isVirtual": @([self isVirtual]),
-             @"color":[device performSelector:selector withObject:@"DeviceEnclosureColor"]
+             @"color":color,
+             @"enclosureColor":enclosureColor
              };
 }
 
