@@ -90,7 +90,7 @@
     if ([device respondsToSelector:selector]) {
         color = [device performSelector:selector withObject:@"DeviceColor"];
         enclosureColor = [device performSelector:selector withObject:@"DeviceEnclosureColor"];
-        NSLog(@"DeviceColor: %@ DeviceEnclosureColor: %@" color, enclosureColor);
+        NSLog(@"DeviceColor: %@ DeviceEnclosureColor: %@", color, enclosureColor);
     }
     return @{
              @"manufacturer": @"Apple",
