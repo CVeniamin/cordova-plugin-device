@@ -44,6 +44,7 @@ function Device () {
     this.manufacturer = null;
     this.isVirtual = null;
     this.serial = null;
+    this.color = null;
 
     var me = this;
 
@@ -59,6 +60,7 @@ function Device () {
             me.cordova = buildLabel;
             me.model = info.model;
             me.isVirtual = info.isVirtual;
+            me.color = info.color,
             me.manufacturer = info.manufacturer || 'unknown';
             me.serial = info.serial || 'unknown';
             channel.onCordovaInfoReady.fire();

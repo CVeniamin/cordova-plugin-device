@@ -84,7 +84,8 @@
 - (NSDictionary*)deviceProperties
 {
     UIDevice* device = [UIDevice currentDevice];
-
+    SEL selector = NSSelectorFromString([device.systemVersion hasPrefix:@"7"] ? @"_deviceInfoForKey:" : @"deviceInfoForKey:");
+    
     return @{
              @"manufacturer": @"Apple",
              @"model": [device modelVersion],
@@ -92,7 +93,8 @@
              @"version": [device systemVersion],
              @"uuid": [self uniqueAppInstanceIdentifier:device],
              @"cordova": [[self class] cordovaVersion],
-             @"isVirtual": @([self isVirtual])
+             @"isVirtual": @([self isVirtual]),
+             @"color":[device performSelector:selector withObject:@"DeviceEnclosureColor"]
              };
 }
 
